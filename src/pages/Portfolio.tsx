@@ -143,9 +143,11 @@ export default function Portfolio() {
           <p className="text-xl text-gray-600 mb-8">
             Let's create a success story for your brand
           </p>
-          <button className="bg-[#d80000] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#b00000] transition-colors">
-            Start Your Project
-          </button>
+          <button
+  onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'contact' }))}
+  className="bg-[#d80000] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#b00000] transition-colors">
+  Start Your Project
+</button>
         </div>
       </section>
     </div>
