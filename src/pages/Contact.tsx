@@ -21,7 +21,7 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        alert('Thank you! We will get back to you within 24 hours.');
+        alert('Thank you! We will get back to you within 24-48 hours.');
         setFormData({
           name: '', email: '', phone: '',
           company: '', service: '', budget: '', message: '',
