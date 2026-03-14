@@ -12,19 +12,24 @@ export default function Contact() {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you within 24 hours.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      service: '',
-      budget: '',
-      message: '',
-    });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        alert('Thank you! We will get back to you within 24 hours.');
+        setFormData({
+          name: '', email: '', phone: '',
+          company: '', service: '', budget: '', message: '',
+        });
+      }
+    } catch (error) {
+      alert('Something went wrong. Please try again.');
+    }
   };
 
   const services = [
