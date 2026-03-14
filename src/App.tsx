@@ -17,6 +17,9 @@ function App() {
 
   useEffect(() => {
     document.title = 'Rysonic Media - Digital Marketing Agency';
+    window.addEventListener('navigate', (e: any) => {
+      setCurrentPage(e.detail);
+    });
   }, []);
 
   const handleNavigate = (page: string) => {
