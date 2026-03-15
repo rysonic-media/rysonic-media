@@ -1,11 +1,8 @@
-import { defineConfig } from 'sanity'
+import { defineConfig, defineType, defineField } from 'sanity'
 import { structureTool } from 'sanity/structure'
-import { defineType, defineField } from 'sanity'
 
 const testimonial = defineType({
-  name: 'testimonial',
-  title: 'Testimonials',
-  type: 'document',
+  name: 'testimonial', title: 'Testimonials', type: 'document',
   fields: [
     defineField({ name: 'name', title: 'Name', type: 'string' }),
     defineField({ name: 'role', title: 'Role', type: 'string' }),
@@ -18,9 +15,7 @@ const testimonial = defineType({
 })
 
 const portfolioItem = defineType({
-  name: 'portfolioItem',
-  title: 'Portfolio',
-  type: 'document',
+  name: 'portfolioItem', title: 'Portfolio', type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'category', title: 'Category', type: 'string' }),
@@ -32,9 +27,7 @@ const portfolioItem = defineType({
 })
 
 const caseStudy = defineType({
-  name: 'caseStudy',
-  title: 'Case Studies',
-  type: 'document',
+  name: 'caseStudy', title: 'Case Studies', type: 'document',
   fields: [
     defineField({ name: 'client', title: 'Client Name', type: 'string' }),
     defineField({ name: 'industry', title: 'Industry', type: 'string' }),
@@ -49,9 +42,7 @@ const caseStudy = defineType({
 })
 
 const service = defineType({
-  name: 'service',
-  title: 'Services',
-  type: 'document',
+  name: 'service', title: 'Services', type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Service Title', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
@@ -60,9 +51,7 @@ const service = defineType({
 })
 
 const blogPost = defineType({
-  name: 'blogPost',
-  title: 'Blog Posts',
-  type: 'document',
+  name: 'blogPost', title: 'Blog Posts', type: 'document',
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' } }),
@@ -73,15 +62,48 @@ const blogPost = defineType({
 })
 
 const contactInfo = defineType({
-  name: 'contactInfo',
-  title: 'Contact Info',
-  type: 'document',
+  name: 'contactInfo', title: 'Contact Info', type: 'document',
   fields: [
     defineField({ name: 'phone', title: 'Phone', type: 'string' }),
     defineField({ name: 'email', title: 'Email', type: 'string' }),
     defineField({ name: 'address', title: 'Address', type: 'text' }),
     defineField({ name: 'location', title: 'Location (Google Maps link)', type: 'string' }),
     defineField({ name: 'hours', title: 'Business Hours', type: 'string' }),
+  ],
+})
+
+const faqItem = defineType({
+  name: 'faqItem', title: 'FAQ', type: 'document',
+  fields: [
+    defineField({ name: 'question', title: 'Question', type: 'string' }),
+    defineField({ name: 'answer', title: 'Answer', type: 'text' }),
+    defineField({ name: 'order', title: 'Order (1,2,3...)', type: 'number' }),
+    defineField({ name: 'published', title: 'Show on website', type: 'boolean' }),
+  ],
+})
+
+const aboutPage = defineType({
+  name: 'aboutPage', title: 'About Page', type: 'document',
+  fields: [
+    defineField({ name: 'title', title: 'Main Title', type: 'string' }),
+    defineField({ name: 'story', title: 'Our Story', type: 'text' }),
+    defineField({ name: 'mission', title: 'Mission Statement', type: 'text' }),
+    defineField({ name: 'vision', title: 'Vision', type: 'text' }),
+    defineField({ name: 'founderName', title: 'Founder Name', type: 'string' }),
+    defineField({ name: 'founderRole', title: 'Founder Role', type: 'string' }),
+    defineField({ name: 'founderImage', title: 'Founder Photo', type: 'image' }),
+  ],
+})
+
+const homePage = defineType({
+  name: 'homePage', title: 'Home Page', type: 'document',
+  fields: [
+    defineField({ name: 'heroTitle', title: 'Hero Title', type: 'string' }),
+    defineField({ name: 'heroSubtitle', title: 'Hero Subtitle', type: 'text' }),
+    defineField({ name: 'ctaText', title: 'CTA Button Text', type: 'string' }),
+    defineField({ name: 'stat1', title: 'Stat 1 (e.g. 500+ Happy Clients)', type: 'string' }),
+    defineField({ name: 'stat2', title: 'Stat 2', type: 'string' }),
+    defineField({ name: 'stat3', title: 'Stat 3', type: 'string' }),
   ],
 })
 
@@ -92,6 +114,6 @@ export default defineConfig({
   dataset: 'production',
   plugins: [structureTool()],
   schema: {
-    types: [testimonial, portfolioItem, caseStudy, service, blogPost, contactInfo],
+    types: [testimonial, portfolioItem, caseStudy, service, blogPost, contactInfo, faqItem, aboutPage, homePage],
   },
 })
