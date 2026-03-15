@@ -1,11 +1,13 @@
 {
   "name": "rysonic-studio",
   "version": "1.0.0",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
-    "start": "sanity start",
-    "deploy": "sanity deploy"
+    "start": "sanity start"
   },
   "dependencies": {
     "sanity": "^3.0.0",
