@@ -1,75 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { client } from '../lib/sanity';
+
+const fallbackItems = [
+  { _id: '1', title: 'E-commerce Fashion Brand', category: 'social-media', image: null, imageUrl: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=800', result: '300% increase in engagement', description: 'Transformed social media presence with strategic content and influencer partnerships.', published: true },
+  { _id: '2', title: 'Tech Startup Launch', category: 'performance-ads', image: null, imageUrl: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800', result: '5x ROI in 3 months', description: 'Launched targeted ad campaigns that drove significant user acquisition and revenue growth.', published: true },
+  { _id: '3', title: 'Fitness App Campaign', category: 'branding', image: null, imageUrl: 'https://images.pexels.com/photos/4164761/pexels-photo-4164761.jpeg?auto=compress&cs=tinysrgb&w=800', result: '50K+ downloads', description: 'Developed comprehensive brand strategy and visual identity that resonated with fitness enthusiasts.', published: true },
+  { _id: '4', title: 'Organic Food Retailer', category: 'e-commerce', image: null, imageUrl: 'https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=800', result: '250% sales growth', description: 'Optimized e-commerce platform and implemented conversion-focused marketing strategies.', published: true },
+  { _id: '5', title: 'Luxury Hotel Chain', category: 'social-media', image: null, imageUrl: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800', result: '400% follower growth', description: 'Created compelling visual content strategy that showcased luxury experiences.', published: true },
+  { _id: '6', title: 'SaaS Platform', category: 'performance-ads', image: null, imageUrl: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800', result: '150% lead generation', description: 'Implemented multi-channel performance marketing strategy targeting B2B decision makers.', published: true },
+  { _id: '7', title: 'Coffee Shop Chain', category: 'branding', image: null, imageUrl: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800', result: 'Complete rebrand', description: 'Refreshed brand identity to appeal to younger demographics while maintaining loyalty.', published: true },
+  { _id: '8', title: 'Beauty Products', category: 'e-commerce', image: null, imageUrl: 'https://images.pexels.com/photos/3785147/pexels-photo-3785147.jpeg?auto=compress&cs=tinysrgb&w=800', result: '180% conversion rate', description: 'Optimized product pages and checkout flow, integrated email marketing automation.', published: true },
+  { _id: '9', title: 'Real Estate Agency', category: 'social-media', image: null, imageUrl: 'https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=800', result: '200% qualified leads', description: 'Leveraged Facebook and Instagram to showcase properties and generate quality leads.', published: true },
+];
+
+const filters = ['all', 'social-media', 'performance-ads', 'branding', 'e-commerce'];
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
+  const [portfolioItems, setPortfolioItems] = useState<any[]>(fallbackItems);
 
-  const filters = ['all', 'social-media', 'performance-ads', 'branding', 'e-commerce'];
-
-  const portfolioItems = [
-    {
-      title: 'E-commerce Fashion Brand',
-      category: 'social-media',
-      image: 'https://images.pexels.com/photos/934070/pexels-photo-934070.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '300% increase in engagement',
-      description: 'Transformed social media presence with strategic content and influencer partnerships.',
-    },
-    {
-      title: 'Tech Startup Launch',
-      category: 'performance-ads',
-      image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '5x ROI in 3 months',
-      description: 'Launched targeted ad campaigns that drove significant user acquisition and revenue growth.',
-    },
-    {
-      title: 'Fitness App Campaign',
-      category: 'branding',
-      image: 'https://images.pexels.com/photos/4164761/pexels-photo-4164761.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '50K+ downloads',
-      description: 'Developed comprehensive brand strategy and visual identity that resonated with fitness enthusiasts.',
-    },
-    {
-      title: 'Organic Food Retailer',
-      category: 'e-commerce',
-      image: 'https://images.pexels.com/photos/1435904/pexels-photo-1435904.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '250% sales growth',
-      description: 'Optimized e-commerce platform and implemented conversion-focused marketing strategies.',
-    },
-    {
-      title: 'Luxury Hotel Chain',
-      category: 'social-media',
-      image: 'https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '400% follower growth',
-      description: 'Created compelling visual content strategy that showcased luxury experiences.',
-    },
-    {
-      title: 'SaaS Platform',
-      category: 'performance-ads',
-      image: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '150% lead generation',
-      description: 'Implemented multi-channel performance marketing strategy targeting B2B decision makers.',
-    },
-    {
-      title: 'Coffee Shop Chain',
-      category: 'branding',
-      image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: 'Complete rebrand',
-      description: 'Refreshed brand identity to appeal to younger demographics while maintaining loyalty.',
-    },
-    {
-      title: 'Beauty Products',
-      category: 'e-commerce',
-      image: 'https://images.pexels.com/photos/3785147/pexels-photo-3785147.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '180% conversion rate',
-      description: 'Optimized product pages and checkout flow, integrated email marketing automation.',
-    },
-    {
-      title: 'Real Estate Agency',
-      category: 'social-media',
-      image: 'https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=800',
-      result: '200% qualified leads',
-      description: 'Leveraged Facebook and Instagram to showcase properties and generate quality leads.',
-    },
-  ];
+  useEffect(() => {
+    client.fetch(`*[_type == "portfolioItem" && published == true]{
+      _id, title, category, result, description, published,
+      image{ asset->{ url } }
+    }`).then((data) => {
+      if (data && data.length > 0) setPortfolioItems(data);
+    }).catch(() => {});
+  }, []);
 
   const filteredItems = activeFilter === 'all'
     ? portfolioItems
@@ -111,19 +68,16 @@ export default function Portfolio() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredItems.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer"
-              >
+            {filteredItems.map((item) => (
+              <div key={item._id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer">
                 <div className="relative overflow-hidden">
                   <img
-                    src={item.image}
+                    src={item.image?.asset?.url || item.imageUrl}
                     alt={item.title}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-[#d80000]">
-                    {item.category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                    {item.category?.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                   </div>
                 </div>
                 <div className="p-6">
@@ -140,14 +94,12 @@ export default function Portfolio() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Want Similar Results?</h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Let's create a success story for your brand
-          </p>
+          <p className="text-xl text-gray-600 mb-8">Let's create a success story for your brand</p>
           <button
-  onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'contact' }))}
-  className="bg-[#d80000] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#b00000] transition-colors">
-  Start Your Project
-</button>
+            onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'contact' }))}
+            className="bg-[#d80000] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#b00000] transition-colors">
+            Start Your Project
+          </button>
         </div>
       </section>
     </div>
