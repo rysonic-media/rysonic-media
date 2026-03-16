@@ -81,7 +81,7 @@ export default function CaseStudies() {
   const [caseStudies, setCaseStudies] = useState<any[]>(fallbackStudies);
 
   useEffect(() => {
-    client.fetch(`*[_type == "caseStudy" && published == true]{
+    client.fetch(`*[_type == "caseStudy"]{
       _id, client, industry, challenge, solution, results,
       testimonialText, testimonialAuthor, published,
       image{ asset->{ url } }
