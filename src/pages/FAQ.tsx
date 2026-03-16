@@ -19,7 +19,7 @@ export default function FAQ() {
   const [faqs, setFaqs] = useState<any[]>(fallbackFaqs);
 
   useEffect(() => {
-    client.fetch(`*[_type == "faqItem" && published == true] | order(order asc){
+    client.fetch(`*[_type == "faqItem"] | order(order asc){
       _id, question, answer, order, published
     }`).then((data) => {
       if (data && data.length > 0) setFaqs(data);
