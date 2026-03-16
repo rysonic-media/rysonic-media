@@ -2,10 +2,10 @@ import heroSection from './heroSection'
 import service from './service'
 import portfolioItem from './portfolioItem'
 import caseStudy from './caseStudy'
-// তোমার existing schemas...
 import testimonial from './testimonial'
 import faqItem from './faqItem'
 import blogPost from './blogPost'
+import siteSettings from './siteSettings'
 
 export const schemaTypes = [
   heroSection,
@@ -15,4 +15,5 @@ export const schemaTypes = [
   testimonial,
   faqItem,
   blogPost,
+  siteSettings,
 ]
