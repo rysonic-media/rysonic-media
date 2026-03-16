@@ -27,7 +27,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
   useEffect(() => {
     // Hero
-    client.fetch(`*[_type == "heroSection"][0]{
+    client.fetch(`*[_type == "homePage"][0]{
   heading, headingHighlight, description,
   primaryButtonText, secondaryButtonText,
   statsNumber, statsLabel,
