@@ -1,6 +1,6 @@
 import { defineConfig } from 'sanity'
 import { deskTool } from 'sanity/desk'
-import schemas from './src/schemas'
+import { schemaTypes } from './src/schemas'
 
 export default defineConfig({
   name: 'rysonic-media',
@@ -9,6 +9,6 @@ export default defineConfig({
   dataset: 'production',
   plugins: [deskTool()],
   schema: {
-    types: schemas,
+    types: schemaTypes,
   },
 })
