@@ -10,11 +10,10 @@ export default function Footer({ onNavigate }: FooterProps) {
   const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
-    client.fetch(`*[_type == "siteSettings"][0]{
-      description, address, phone, email,
-      facebook, instagram, twitter, linkedin
-    }`).then((data) => { if (data) setSettings(data); }).catch(() => {});
-  }, []);
+  client.fetch(`*[_type == "contactInfo"][0]{
+    phone, email, address
+  }`).then((data) => { if (data) setSettings(data); }).catch(() => {});
+}, []);
 
   const handleNavigate = (pageId: string) => {
     onNavigate(pageId);
@@ -30,21 +29,21 @@ export default function Footer({ onNavigate }: FooterProps) {
               <span className="text-[#d80000]">Rysonic</span> Media
             </h3>
             <p className="text-gray-400 mb-4">
-              {settings?.description || 'Building brands and growing influence through strategic digital marketing.'}
+              {settings?.description || 'Empowering brands through social media management, personal branding, Google Ads, and professional content creation.'}
             </p>
             <div className="flex space-x-4">
-              <a href={settings?.facebook || '#'} className="text-gray-400 hover:text-[#d80000] transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href={settings?.instagram || '#'} className="text-gray-400 hover:text-[#d80000] transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href={settings?.twitter || '#'} className="text-gray-400 hover:text-[#d80000] transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a href={settings?.linkedin || '#'} className="text-gray-400 hover:text-[#d80000] transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
+              <a href="#" className="text-gray-400 hover:text-[#d80000] transition-colors">
+  <Facebook className="h-5 w-5" />
+</a>
+<a href="https://www.instagram.com/rysonicmedia?igsh=dmZ5YmZva201anpq" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#d80000] transition-colors">
+  <Instagram className="h-5 w-5" />
+</a>
+<a href="#" className="text-gray-400 hover:text-[#d80000] transition-colors">
+  <Twitter className="h-5 w-5" />
+</a>
+<a href="https://www.linkedin.com/company/rysonicmedia/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-[#d80000] transition-colors">
+  <Linkedin className="h-5 w-5" />
+</a>
             </div>
           </div>
           <div>
@@ -82,15 +81,15 @@ export default function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-[#d80000] mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400">{settings?.address || '123 Business Street, Marketing City, MC 12345'}</span>
+               <span className="text-gray-400">133/I, Mahisyapara, Khardah, 700117</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-[#d80000] flex-shrink-0" />
-                <span className="text-gray-400">{settings?.phone || '+1 (555) 123-4567'}</span>
+                <span className="text-gray-400">8622949092 / 7890338688</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-[#d80000] flex-shrink-0" />
-                <span className="text-gray-400">{settings?.email || 'hello@rysonicmedia.com'}</span>
+                <span className="text-gray-400">rysonicmedia@gmail.com</span>
               </li>
             </ul>
           </div>
