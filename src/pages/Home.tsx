@@ -13,7 +13,8 @@ import {
   Plus,
   Minus,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { client } from '../lib/sanity';
 
 interface HomeProps {
   onNavigate: (page: string) => void;
@@ -21,6 +22,24 @@ interface HomeProps {
 
 export default function Home({ onNavigate }: HomeProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [cmsTestimonials, setCmsTestimonials] = useState<any[]>([]);
+const [cmsFaqs, setCmsFaqs] = useState<any[]>([]);
+const [cmsBlogPosts, setCmsBlogPosts] = useState<any[]>([]);
+
+useEffect(() => {
+  client.fetch(`*[_type == "testimonial" && published == true][0...3]{
+    _id, name, company, role, content, rating
+  }`).then((data) => { if (data?.length > 0) setCmsTestimonials(data); }).catch(() => {});
+
+  client.fetch(`*[_type == "faqItem" && published == true] | order(order asc){
+    _id, question, answer
+  }`).then((data) => { if (data?.length > 0) setCmsFaqs(data); }).catch(() => {});
+
+  client.fetch(`*[_type == "blogPost" && published == true][0...3]{
+    _id, title, content, "slug": slug.current,
+    image{ asset->{ url } }
+  }`).then((data) => { if (data?.length > 0) setCmsBlogPosts(data); }).catch(() => {});
+}, []);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -366,14 +385,14 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {(cmsTestimonials.length > 0 ? cmsTestimonials : testimonials).map((testimonial, index) => (
               <div key={index} className="bg-white p-8 rounded-xl shadow-lg">
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-[#d80000] text-[#d80000]" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-6 leading-relaxed">{testimonial.text}</p>
+                <p className="text-gray-600 mb-6 leading-relaxed">{testimonial.content || testimonial.text}</p>
                 <div>
                   <div className="font-bold text-gray-900">{testimonial.name}</div>
                   <div className="text-sm text-gray-500">{testimonial.company}</div>
@@ -401,11 +420,11 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {(cmsBlogPosts.length > 0 ? cmsBlogPosts : blogPosts).map((post, index) => (
               <article key={index} className="bg-white rounded-xl overflow-hidden border-2 border-gray-100 hover:border-[#d80000] transition-all duration-300 hover:shadow-lg group cursor-pointer">
                 <div className="relative overflow-hidden">
                   <img
-                    src={post.image}
+                    src={post.image?.asset?.url || post.image}
                     alt={post.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -449,7 +468,7 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
           </div>
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {(cmsFaqs.length > 0 ? cmsFaqs : faqs).map((faq, index) => (
               <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm">
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
