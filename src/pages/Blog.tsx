@@ -22,7 +22,7 @@ export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<any[]>(fallbackPosts);
 
   useEffect(() => {
-    client.fetch(`*[_type == "blogPost" && published == true] | order(_createdAt desc){
+    client.fetch(`*[_type == "blogPost"] | order(_createdAt desc){
       _id, title, slug, content, category, published,
       image{ asset->{ url } }
     }`).then((data) => {
