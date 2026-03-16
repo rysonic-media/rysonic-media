@@ -17,13 +17,19 @@ const fallbackFaqs = [
 export default function FAQ() {
   const [openFaq, setOpenFaq] = useState<string | null>('1');
   const [faqs, setFaqs] = useState<any[]>(fallbackFaqs);
+  
+  const [sanityLoaded, setSanityLoaded] = useState(false);
 
   useEffect(() => {
     client.fetch(`*[_type == "faqItem"] | order(order asc){
       _id, question, answer, order, published
     }`).then((data) => {
+      setSanityLoaded(true);
       if (data && data.length > 0) setFaqs(data);
-    }).catch(() => {});
+      else setFaqs([]);
+    }).catch(() => {
+      setSanityLoaded(false);
+    });
   }, []);
 
   return (
@@ -42,7 +48,7 @@ export default function FAQ() {
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-4">
-            {faqs.map((faq) => (
+           {(sanityLoaded ? faqs : fallbackFaqs).map((faq) => (
               <div key={faq._id} className="bg-white rounded-xl overflow-hidden shadow-sm border-2 border-gray-100 hover:border-[#d80000] transition-colors">
                 <button
                   onClick={() => setOpenFaq(openFaq === faq._id ? null : faq._id)}
