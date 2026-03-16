@@ -16,19 +16,21 @@ const fallbackFaqs = [
 
 export default function FAQ() {
   const [openFaq, setOpenFaq] = useState<string | null>('1');
-  const [faqs, setFaqs] = useState<any[]>(fallbackFaqs);
-  
-  const [sanityLoaded, setSanityLoaded] = useState(false);
+  const [displayFaqs, setDisplayFaqs] = useState<any[]>(fallbackFaqs);
 
   useEffect(() => {
+    // Fetch ALL faqs including unpublished to check if CMS has data
     client.fetch(`*[_type == "faqItem"] | order(order asc){
       _id, question, answer, order, published
     }`).then((data) => {
-      setSanityLoaded(true);
-      if (data && data.length > 0) setFaqs(data);
-      else setFaqs([]);
+      if (data && data.length > 0) {
+        // CMS has data — show only published ones
+        const published = data.filter((f: any) => f.published === true);
+        setDisplayFaqs(published);
+      }
+      // If no data in CMS — keep fallback
     }).catch(() => {
-      setSanityLoaded(false);
+      // Error — keep fallback
     });
   }, []);
 
@@ -48,7 +50,7 @@ export default function FAQ() {
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-4">
-           {(sanityLoaded ? faqs : fallbackFaqs).map((faq) => (
+            {displayFaqs.map((faq) => (
               <div key={faq._id} className="bg-white rounded-xl overflow-hidden shadow-sm border-2 border-gray-100 hover:border-[#d80000] transition-colors">
                 <button
                   onClick={() => setOpenFaq(openFaq === faq._id ? null : faq._id)}
