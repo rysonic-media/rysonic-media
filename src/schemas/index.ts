@@ -17,3 +17,4 @@ export const schemaTypes = [
   blogPost,
   siteSettings,
 ]
+export default schemaTypes
