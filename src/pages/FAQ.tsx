@@ -25,8 +25,7 @@ export default function FAQ() {
     }`).then((data) => {
       if (data && data.length > 0) {
         // CMS has data — show only published ones
-        const published = data.filter((f: any) => f.published === true);
-        setDisplayFaqs(published);
+        setDisplayFaqs(data);
       }
       // If no data in CMS — keep fallback
     }).catch(() => {
