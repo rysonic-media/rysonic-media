@@ -23,9 +23,9 @@ export default function Services() {
   const [services, setServices] = useState<any[]>(fallbackServices);
 
   useEffect(() => {
-    client.fetch(`*[_type == "service" && published == true]{
-      _id, title, description, published
-    }`).then((data) => {
+   client.fetch(`*[_type == "service"]{
+  _id, title, description, icon, features
+}`).then((data) => {
       if (data && data.length > 0) setServices(data);
     }).catch(() => {});
   }, []);
