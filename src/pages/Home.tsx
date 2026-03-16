@@ -27,11 +27,13 @@ export default function Home({ onNavigate }: HomeProps) {
 
   useEffect(() => {
     // Hero
-    client.fetch(`*[_type == "homePage"][0]{
-  heading, headingHighlight, description,
-  primaryButtonText, secondaryButtonText,
-  statsNumber, statsLabel,
-  image{ asset->{ url } }
+   client.fetch(`*[_type == "homePage"][0]{
+  heroTitle,
+  heroSubtitle,
+  ctaButtonText,
+  stat1,
+  stat2,
+  stat3
 }`).then((data) => {
   console.log('Hero data:', data);
   if (data) setHero(data);
@@ -89,57 +91,53 @@ export default function Home({ onNavigate }: HomeProps) {
   return (
     <div className="bg-white">
 
-      {/* ── HERO ── */}
-      <section className="relative bg-gradient-to-br from-gray-50 to-white py-20 md:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                {hero?.heading || 'Build Your Brand.'}{' '}
-                <span className="text-[#d80000]">
-                  {hero?.headingHighlight || 'Grow Your Influence.'}
-                </span>
-              </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                {hero?.description || 'Rysonic Media helps businesses grow using social media marketing and performance advertising.'}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="bg-[#d80000] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#b00000] transition-colors flex items-center justify-center gap-2"
-                >
-                  {hero?.primaryButtonText || 'Get Started'} <ArrowRight className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={() => onNavigate('portfolio')}
-                  className="border-2 border-gray-300 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:border-[#d80000] hover:text-[#d80000] transition-colors"
-                >
-                  {hero?.secondaryButtonText || 'View Our Work'}
-                </button>
-              </div>
+     {/* ── HERO ── */}
+<section className="relative bg-gradient-to-br from-gray-50 to-white py-20 md:py-32">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          {hero?.heroTitle || 'Build Your Brand. Grow Your Influence.'}
+        </h1>
+        <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+          {hero?.heroSubtitle || 'Rysonic Media helps businesses grow using social media marketing and performance advertising.'}
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <button
+            onClick={() => onNavigate('contact')}
+            className="bg-[#d80000] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#b00000] transition-colors flex items-center justify-center gap-2"
+          >
+            {hero?.ctaButtonText || 'Get Started'} <ArrowRight className="h-5 w-5" />
+          </button>
+          <button
+            onClick={() => onNavigate('portfolio')}
+            className="border-2 border-gray-300 text-gray-900 px-8 py-4 rounded-lg font-semibold hover:border-[#d80000] hover:text-[#d80000] transition-colors"
+          >
+            View Our Work
+          </button>
+        </div>
+      </div>
+      <div className="relative">
+        <img
+          src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800"
+          alt="Digital Marketing"
+          className="rounded-2xl shadow-2xl"
+        />
+        <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
+          <div className="flex items-center gap-4">
+            <div className="bg-[#d80000] bg-opacity-10 p-3 rounded-lg">
+              <TrendingUp className="h-8 w-8 text-[#d80000]" />
             </div>
-            <div className="relative">
-              <img
-                src={hero?.image?.asset?.url || 'https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                alt="Digital Marketing"
-                className="rounded-2xl shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl">
-                <div className="flex items-center gap-4">
-                  <div className="bg-[#d80000] bg-opacity-10 p-3 rounded-lg">
-                    <TrendingUp className="h-8 w-8 text-[#d80000]" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-gray-900">{hero?.statsNumber || '500+'}</div>
-                    <div className="text-sm text-gray-600">{hero?.statsLabel || 'Happy Clients'}</div>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <div className="text-2xl font-bold text-gray-900">{hero?.stat1 || '500+ Happy Clients'}</div>
+              <div className="text-sm text-gray-600">{hero?.stat2 || '3X Average ROAS Delivered'}</div>
             </div>
           </div>
         </div>
-      </section>
-
+      </div>
+    </div>
+  </div>
+</section>
       {/* ── SERVICES ── */}
       <section id="services" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
