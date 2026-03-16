@@ -29,7 +29,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               <span className="text-[#d80000]">Rysonic</span> Media
             </h3>
             <p className="text-gray-400 mb-4">
-              {settings?.description || 'Empowering brands through social media management, personal branding, Google Ads, and professional content creation.'}
+              {settings?.description || 'Building brands. Growing influence. Delivering results.'}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-[#d80000] transition-colors">
