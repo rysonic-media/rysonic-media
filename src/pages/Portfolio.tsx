@@ -20,7 +20,7 @@ export default function Portfolio() {
   const [portfolioItems, setPortfolioItems] = useState<any[]>(fallbackItems);
 
   useEffect(() => {
-    client.fetch(`*[_type == "portfolioItem" && published == true]{
+    client.fetch(`*[_type == "portfolioItem"]{
       _id, title, category, result, description, published,
       image{ asset->{ url } }
     }`).then((data) => {
