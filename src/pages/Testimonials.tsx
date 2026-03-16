@@ -130,7 +130,7 @@ export default function Testimonials() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client.fetch(`*[_type == "testimonial" && published == true]{
+    client.fetch(`*[_type == "testimonial"]{
       _id, name, role, company, content, rating, result, published,
       image{ asset->{ url } }
     }`).then((data) => {
