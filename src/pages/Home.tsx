@@ -28,12 +28,16 @@ export default function Home({ onNavigate }: HomeProps) {
   useEffect(() => {
     // Hero
     client.fetch(`*[_type == "heroSection"][0]{
-      heading, headingHighlight, description,
-      primaryButtonText, secondaryButtonText,
-      statsNumber, statsLabel,
-      image{ asset->{ url } }
-    }`).then((data) => { if (data) setHero(data); }).catch(() => {});
-
+  heading, headingHighlight, description,
+  primaryButtonText, secondaryButtonText,
+  statsNumber, statsLabel,
+  image{ asset->{ url } }
+}`).then((data) => {
+  console.log('Hero data:', data);
+  if (data) setHero(data);
+}).catch((err) => {
+  console.log('Hero error:', err);
+});
     // Services
     client.fetch(`*[_type == "service" && published == true] | order(order asc){
       _id, title, description
