@@ -1,4 +1,4 @@
-import { Megaphone, Target, Palette, BarChart3, Users, TrendingUp, Smartphone, Mail, Video, Search, ShoppingCart, PenTool, Zap } from 'lucide-react';
+import { Megaphone, Target, BarChart3, Users, TrendingUp, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { client } from '../lib/sanity';
 
@@ -54,7 +54,7 @@ export default function Services() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => {
-              const IconComponent = iconMap[service.icon] || Megaphone;
+              const IconComponent = iconMap[service.title] || Megaphone;
               return (
                 <div key={service._id} className="bg-white p-8 rounded-xl border-2 border-gray-100 hover:border-[#d80000] transition-all duration-300 hover:shadow-xl group">
                   <div className="bg-[#d80000] bg-opacity-10 w-14 h-14 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#d80000] transition-colors">
