@@ -7,8 +7,6 @@ const fallbackAbout = {
   story: 'Founded in 2015, Rysonic Media started with a simple mission: to help businesses harness the power of digital marketing to achieve extraordinary growth.\n\nWhat began as a small team of social media enthusiasts has grown into a full-service digital marketing agency, serving clients across various industries.\n\nToday, we combine creative excellence with data-driven strategies to deliver campaigns that not only look great but also drive real business results.',
   mission: 'To help businesses achieve extraordinary growth through strategic, data-driven digital marketing.',
   vision: 'To be the most trusted digital marketing partner for businesses worldwide.',
-  founderName: 'Alex Martinez',
-  founderRole: 'Founder & CEO',
 };
 
 const values = [
@@ -17,13 +15,6 @@ const values = [
   { icon: Zap, title: 'Innovation', description: 'We stay ahead of trends and leverage cutting-edge strategies to keep you competitive.' },
   { icon: Award, title: 'Excellence', description: 'We maintain the highest standards in everything we do, from strategy to execution.' },
 ];
-
-const [team, setTeam] = useState<any[]>([
-  { _id: '1', name: 'Alex Martinez', role: 'Founder & CEO', image: { asset: { url: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-  { _id: '2', name: 'Sarah Chen', role: 'Head of Strategy', image: { asset: { url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-  { _id: '3', name: 'Marcus Johnson', role: 'Creative Director', image: { asset: { url: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-  { _id: '4', name: 'Emily Rodriguez', role: 'Performance Manager', image: { asset: { url: 'https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-]);
 
 const stats = [
   { number: '500+', label: 'Happy Clients' },
@@ -34,10 +25,23 @@ const stats = [
 
 export default function About() {
   const [about, setAbout] = useState<any>(fallbackAbout);
+  const [team, setTeam] = useState<any[]>([
+    { _id: '1', name: 'Alex Martinez', role: 'Founder & CEO', image: { asset: { url: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+    { _id: '2', name: 'Sarah Chen', role: 'Head of Strategy', image: { asset: { url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+    { _id: '3', name: 'Marcus Johnson', role: 'Creative Director', image: { asset: { url: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+    { _id: '4', name: 'Emily Rodriguez', role: 'Performance Manager', image: { asset: { url: 'https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+  ]);
 
-  client.fetch(`*[_type == "teamMember"] | order(order asc){
-  _id, name, role, image{ asset->{ url } }
-}`).then((data) => { if (data?.length > 0) setTeam(data); }).catch(() => {});
+  useEffect(() => {
+    client.fetch(`*[_type == "aboutPage"][0]{
+      title, story, mission, vision,
+      founderImage{ asset->{ url } }
+    }`).then((data) => { if (data) setAbout(data); }).catch(() => {});
+
+    client.fetch(`*[_type == "teamMember"] | order(order asc){
+      _id, name, role, image{ asset->{ url } }
+    }`).then((data) => { if (data?.length > 0) setTeam(data); }).catch(() => {});
+  }, []);
 
   return (
     <div className="bg-white">
@@ -115,14 +119,14 @@ export default function About() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member) => (
-  <div key={member._id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-    <img src={member.image?.asset?.url} alt={member.name} className="w-full h-64 object-cover" />
-    <div className="p-6 text-center">
-      <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-      <p className="text-[#d80000] font-medium">{member.role}</p>
-    </div>
-  </div>
-))}
+              <div key={member._id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                <img src={member.image?.asset?.url} alt={member.name} className="w-full h-64 object-cover" />
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+                  <p className="text-[#d80000] font-medium">{member.role}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
