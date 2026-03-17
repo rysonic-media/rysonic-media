@@ -25,11 +25,11 @@ const stats = [
 
 export default function About() {
   const [about, setAbout] = useState<any>(fallbackAbout);
-  const [team, setTeam] = useState<any[]>([
-  { _id: '1', name: 'Rupesh Saha', role: 'Founder', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=1TXBmfglTw-m5G9jgWE_J-ClJX-G-nfZO' } } },
-  { _id: '2', name: 'Saptaparna Dhar', role: 'Co-Founder', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=1aprFBdenE1ExIXuJX0Tw2KU08uTnmef0' } } },
-  { _id: '3', name: 'Arunwita Chatterjee', role: 'Content Strategist', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=1bQ1pqD_h0W9qolf_fFo7Ixemfc__u4uE' } } },
-  { _id: '4', name: 'Pratyush Biswas', role: 'Performance Marketer', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=165ZWxJO672Jq2ANZx8nqkf-CtHlM0YFH' } } },
+ const [team, setTeam] = useState<any[]>([
+  { _id: '1', name: 'Rupesh Saha', role: 'Founder', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771220/WhatsApp_Image_2026-03-17_at_11.20.58_PM_kngopm.jpg' } } },
+  { _id: '2', name: 'Saptaparna Dhar', role: 'Co-Founder', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771284/image_qvhc5k.jpg' } } },
+  { _id: '3', name: 'Arunwita Chatterjee', role: 'Content Strategist', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771295/WhatsApp_Image_2026-03-17_at_9.18.41_PM_hnujsg.jpg' } } },
+  { _id: '4', name: 'Pratyush Biswas', role: 'Performance Marketer', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771303/IMG_0.JPG_wweoji.jpg' } } },
 ]);
 
   useEffect(() => {
