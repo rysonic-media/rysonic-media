@@ -1,7 +1,4 @@
-import {
-  TrendingUp, Users, Target, Megaphone, BarChart3, Palette,
-  ChevronRight, ArrowRight, Star, Calendar, Send, Plus, Minus,
-} from 'lucide-react';
+import { TrendingUp, Users, Target, Megaphone, BarChart3, Palette, ChevronRight, ArrowRight, Star, Calendar, Send, Plus, Minus, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { client } from '../lib/sanity';
 
@@ -10,7 +7,12 @@ interface HomeProps {
 }
 
 const iconMap: Record<string, any> = {
-  Megaphone, Target, Palette, BarChart3, Users, TrendingUp,
+  'Personal Branding': Users,
+  'Performance Advertising': Target,
+  'Brand Positioning': Megaphone,
+  'Analytics & Reporting': BarChart3,
+  'LinkedIn Marketing': TrendingUp,
+  'Growth Strategy': Zap,
 };
 
 export default function Home({ onNavigate }: HomeProps) {
@@ -69,9 +71,9 @@ export default function Home({ onNavigate }: HomeProps) {
     }`).then((data) => { if (data) setHero(data); }).catch(() => {});
 
     // Services
-    client.fetch(`*[_type == "service"] | order(order asc){
-      _id, title, description, icon
-    }`).then((data) => { if (data?.length > 0) setServices(data); }).catch(() => {});
+   client.fetch(`*[_type == "service"] | order(order asc)[0...3]{
+  _id, title, description, icon
+}`).then((data) => { if (data?.length > 0) setServices(data); }).catch(() => {});
 
     // Portfolio
     client.fetch(`*[_type == "portfolioItem"] | order(order asc)[0...3]{
