@@ -26,11 +26,11 @@ const stats = [
 export default function About() {
   const [about, setAbout] = useState<any>(fallbackAbout);
   const [team, setTeam] = useState<any[]>([
-    { _id: '1', name: 'Alex Martinez', role: 'Founder & CEO', image: { asset: { url: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-    { _id: '2', name: 'Sarah Chen', role: 'Head of Strategy', image: { asset: { url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-    { _id: '3', name: 'Marcus Johnson', role: 'Creative Director', image: { asset: { url: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-    { _id: '4', name: 'Emily Rodriguez', role: 'Performance Manager', image: { asset: { url: 'https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
-  ]);
+  { _id: '1', name: 'Rupesh Saha', role: 'Founder', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=1TXBmfglTw-m5G9jgWE_J-ClJX-G-nfZO' } } },
+  { _id: '2', name: 'Saptaparna Dhar', role: 'Co-Founder', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=1aprFBdenE1ExIXuJX0Tw2KU08uTnmef0' } } },
+  { _id: '3', name: 'Arunwita Chatterjee', role: 'Content Strategist', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=1bQ1pqD_h0W9qolf_fFo7Ixemfc__u4uE' } } },
+  { _id: '4', name: 'Pratyush Biswas', role: 'Performance Marketer', image: { asset: { url: 'https://drive.google.com/uc?export=view&id=165ZWxJO672Jq2ANZx8nqkf-CtHlM0YFH' } } },
+]);
 
   useEffect(() => {
     client.fetch(`*[_type == "aboutPage"][0]{
