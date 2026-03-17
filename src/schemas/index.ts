@@ -6,6 +6,7 @@ import testimonial from './testimonial'
 import faqItem from './faqItem'
 import blogPost from './blogPost'
 import siteSettings from './siteSettings'
+import teamMember from './teamMember'
 
 export const schemaTypes = [
   heroSection,
@@ -16,5 +17,6 @@ export const schemaTypes = [
   faqItem,
   blogPost,
   siteSettings,
+  teamMember,
 ]
 export default schemaTypes
