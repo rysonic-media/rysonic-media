@@ -10,17 +10,17 @@ const fallbackAbout = {
 };
 
 const values = [
-  { icon: Target, title: 'Results-Driven', description: 'We focus on delivering measurable outcomes that matter to your business.' },
-  { icon: Heart, title: 'Client-Centric', description: 'Your success is our success. We build lasting partnerships, not just campaigns.' },
-  { icon: Zap, title: 'Innovation', description: 'We stay ahead of trends and leverage cutting-edge strategies to keep you competitive.' },
-  { icon: Award, title: 'Excellence', description: 'We maintain the highest standards in everything we do, from strategy to execution.' },
+  { icon: Target, title: 'Results-Driven', description: 'We measure success in qualified leads and revenue — not likes, impressions, or vanity metrics.' },
+  { icon: Heart, title: 'Client-Centric', description: 'Your growth is our obsession. We build strategies around your offer, your audience, and your goals.' },
+  { icon: Zap, title: 'Authority-First', description: 'We don\'t just market you — we position you as the go-to expert in your niche.' },
+  { icon: Award, title: 'Excellence', description: 'From strategy to execution, we maintain the highest standards in everything we deliver.' },
 ];
 
 const stats = [
   { number: '500+', label: 'Happy Clients' },
-  { number: '1000+', label: 'Campaigns Launched' },
+  { number: '6 Years', label: 'Of Experience' },
   { number: '95%', label: 'Client Retention' },
-  { number: '$50M+', label: 'Revenue Generated' },
+  { number: '1000+', label: 'Campaigns Designed' },
 ];
 
 export default function About() {
