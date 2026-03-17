@@ -18,12 +18,12 @@ const values = [
   { icon: Award, title: 'Excellence', description: 'We maintain the highest standards in everything we do, from strategy to execution.' },
 ];
 
-const team = [
-  { name: 'Alex Martinez', role: 'Founder & CEO', image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { name: 'Sarah Chen', role: 'Head of Strategy', image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { name: 'Marcus Johnson', role: 'Creative Director', image: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { name: 'Emily Rodriguez', role: 'Performance Manager', image: 'https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=400' },
-];
+const [team, setTeam] = useState<any[]>([
+  { _id: '1', name: 'Alex Martinez', role: 'Founder & CEO', image: { asset: { url: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+  { _id: '2', name: 'Sarah Chen', role: 'Head of Strategy', image: { asset: { url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+  { _id: '3', name: 'Marcus Johnson', role: 'Creative Director', image: { asset: { url: 'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+  { _id: '4', name: 'Emily Rodriguez', role: 'Performance Manager', image: { asset: { url: 'https://images.pexels.com/photos/3756681/pexels-photo-3756681.jpeg?auto=compress&cs=tinysrgb&w=400' } } },
+]);
 
 const stats = [
   { number: '500+', label: 'Happy Clients' },
@@ -35,14 +35,9 @@ const stats = [
 export default function About() {
   const [about, setAbout] = useState<any>(fallbackAbout);
 
-  useEffect(() => {
-    client.fetch(`*[_type == "aboutPage"][0]{
-      title, story, mission, vision, founderName, founderRole,
-      founderImage{ asset->{ url } }
-    }`).then((data) => {
-      if (data) setAbout(data);
-    }).catch(() => {});
-  }, []);
+  client.fetch(`*[_type == "teamMember"] | order(order asc){
+  _id, name, role, image{ asset->{ url } }
+}`).then((data) => { if (data?.length > 0) setTeam(data); }).catch(() => {});
 
   return (
     <div className="bg-white">
@@ -119,15 +114,15 @@ export default function About() {
             <p className="text-xl text-gray-600">The experts behind your success</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                <img src={member.image} alt={member.name} className="w-full h-64 object-cover" />
-                <div className="p-6 text-center">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                  <p className="text-[#d80000] font-medium">{member.role}</p>
-                </div>
-              </div>
-            ))}
+            {team.map((member) => (
+  <div key={member._id} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+    <img src={member.image?.asset?.url} alt={member.name} className="w-full h-64 object-cover" />
+    <div className="p-6 text-center">
+      <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+      <p className="text-[#d80000] font-medium">{member.role}</p>
+    </div>
+  </div>
+))}
           </div>
         </div>
       </section>
