@@ -1,8 +1,15 @@
-import { Megaphone, Target, Palette, BarChart3, Users, TrendingUp, Smartphone, Mail, Video, Search, ShoppingCart, PenTool } from 'lucide-react';
+import { Megaphone, Target, Palette, BarChart3, Users, TrendingUp, Smartphone, Mail, Video, Search, ShoppingCart, PenTool, Zap } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { client } from '../lib/sanity';
 
-const iconMap: any = { Megaphone, Target, Palette, BarChart3, Users, TrendingUp, Smartphone, Mail, Video, Search, ShoppingCart, PenTool };
+const iconMap: any = {
+  'Personal Branding': Users,
+  'Performance Advertising': Target,
+  'Brand Positioning': Megaphone,
+  'Analytics & Reporting': BarChart3,
+  'LinkedIn Marketing': TrendingUp,
+  'Growth Strategy': Zap,
+};
 
 const fallbackServices = [
   { _id: '1', title: 'Social Media Marketing', description: 'Build and engage your audience across all major social platforms with strategic content and campaigns.', icon: 'Megaphone', features: ['Content strategy & planning', 'Community management', 'Social media advertising', 'Influencer partnerships', 'Analytics & reporting'], published: true },
