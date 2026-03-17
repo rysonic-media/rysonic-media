@@ -26,8 +26,8 @@ const stats = [
 export default function About() {
   const [about, setAbout] = useState<any>(fallbackAbout);
  const [team, setTeam] = useState<any[]>([
-  { _id: '1', name: 'Rupesh Saha', role: 'Founder', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771220/WhatsApp_Image_2026-03-17_at_11.20.58_PM_kngopm.jpg' } } },
-  { _id: '2', name: 'Saptaparna Dhar', role: 'Co-Founder', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771284/image_qvhc5k.jpg' } } },
+  { _id: '1', name: 'Rupesh Saha', role: 'Founder', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771689/WhatsApp_Image_2026-03-17_at_11.20.58_PM_inpieg.jpg' } } },
+  { _id: '2', name: 'Saptaparna Dhar', role: 'Co-Founder', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771700/image_tiifoi.png' } } },
   { _id: '3', name: 'Arunwita Chatterjee', role: 'Content Strategist', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771295/WhatsApp_Image_2026-03-17_at_9.18.41_PM_hnujsg.jpg' } } },
   { _id: '4', name: 'Pratyush Biswas', role: 'Performance Marketer', image: { asset: { url: 'https://res.cloudinary.com/dwtbtgxzy/image/upload/v1773771303/IMG_0.JPG_wweoji.jpg' } } },
 ]);
