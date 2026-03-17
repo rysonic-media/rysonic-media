@@ -91,9 +91,9 @@ export default function Home({ onNavigate }: HomeProps) {
     }`).then((data) => { if (data?.length > 0) setTestimonials(data); }).catch(() => {});
 
     // FAQs
-    client.fetch(`*[_type == "faqItem"] | order(order asc){
-      _id, question, answer
-    }`).then((data) => { if (data?.length > 0) setFaqs(data); }).catch(() => {});
+    client.fetch(`*[_type == "faqItem"] | order(order asc)[0...2]{
+  _id, question, answer
+}`).then((data) => { if (data?.length > 0) setFaqs(data); }).catch(() => {});
 
     // Blog Posts
     client.fetch(`*[_type == "blogPost"][0...3]{
