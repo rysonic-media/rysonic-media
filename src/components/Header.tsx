@@ -38,7 +38,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   <img
     src="/logo1.svg"
     alt="Rysonic Media Logo"
-    className="h-10 w-auto"
+    className="h-16 w-auto"
   />
 </div>
 
