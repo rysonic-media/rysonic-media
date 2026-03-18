@@ -36,7 +36,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
   onClick={() => handleNavigate('home')}
 >
   <img
-    src="/logo.svg"
+    src="/logo1.svg"
     alt="Rysonic Media Logo"
     className="h-10 w-auto"
   />
